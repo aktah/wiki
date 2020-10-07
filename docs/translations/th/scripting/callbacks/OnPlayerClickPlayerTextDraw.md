@@ -1,7 +1,7 @@
 ---
 id: OnPlayerClickPlayerTextDraw
 title: OnPlayerClickPlayerTextDraw
-description: This callback is called when a player clicks on a player-textdraw.
+description: Callback นี้ถูกเรียกเมื่อผู้เล่นคลิกที่ Player-Textdraw
 tags: ["player", "textdraw", "playertextdraw"]
 ---
 
@@ -13,16 +13,16 @@ Callback นี้ถูกเพิ่มใน SA-MP 0.3e และจะไ�
 
 ## คำอธิบาย
 
-This callback is called when a player clicks on a player-textdraw. It is not called when player cancels the select mode (ESC) - however, OnPlayerClickTextDraw is.
+Callback นี้ถูกเรียกเมื่อผู้เล่นคลิกที่ Player-Textdraw มันจะไม่ถูกเรียกถ้าผู้เล่นยกเลิกโหมดการเลือก (ESC) - แต่ OnPlayerClickTextDraw ถูกเรียก
 
-| Name         | Description                                             |
+| ชื่อ           | คำอธิบาย                                             |
 | ------------ | ------------------------------------------------------- |
-| playerid     | The ID of the player that selected a textdraw           |
-| playertextid | The ID of the player-textdraw that the player selected. |
+| playerid     | ไอดีของผู้เล่นที่เลือก Textdraw                                |
+| playertextid | ไอดีของ Player-Textdraw ที่ผู้เล่นเลือก                        |
 
 ## ส่งคืน
 
-It is always called first in filterscripts so returning 1 there also blocks other scripts from seeing it.
+มันถูกเรียกในฟิลเตอร์สคริปต์ก่อนเสมอ ดังนั้นการส่งค่าคืนเป็น 1 จะบล็อกไม่ให้ฟิลเตอร์สคริปต์อื่น ๆ ได้เห็น
 
 ## ตัวอย่าง
 
@@ -31,7 +31,7 @@ new PlayerText:gPlayerTextDraw[MAX_PLAYERS];
 
 public OnPlayerConnect(playerid)
 {
-    // Create the textdraw
+    // สร้าง Textdraw
     gPlayerTextDraw[playerid] = CreatePlayerTextDraw(playerid, 10.000000, 141.000000, "MyTextDraw");
     PlayerTextDrawTextSize(playerid, gPlayerTextDraw[playerid], 60.000000, 20.000000);
     PlayerTextDrawAlignment(playerid, gPlayerTextDraw[playerid],0);
@@ -42,10 +42,10 @@ public OnPlayerConnect(playerid)
     PlayerTextDrawSetProportional(playerid, gPlayerTextDraw[playerid], 1);
     PlayerTextDrawSetShadow(playerid, gPlayerTextDraw[playerid], 1);
 
-    // Make it selectable
+    // ทำให้มันเลือกได้
     PlayerTextDrawSetSelectable(playerid, gPlayerTextDraw[playerid], 1);
 
-    // Show it to the player
+    // แสดงมันให้กับผู้เล่น
     PlayerTextDrawShow(playerid, gPlayerTextDraw[playerid]);
     return 1;
 }
@@ -63,7 +63,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 {
     if(playertextid == gPlayerTextDraw[playerid])
     {
-         SendClientMessage(playerid, 0xFFFFFFAA, "You clicked on a textdraw.");
+         SendClientMessage(playerid, 0xFFFFFFAA, "คุณคลิกบน Textdraw");
          CancelSelectTextDraw(playerid);
          return 1;
     }
@@ -75,12 +75,12 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 
 :::warning
 
-When a player presses ESC to cancel selecting a textdraw, OnPlayerClickTextDraw is called with a textdraw ID of 'INVALID_TEXT_DRAW'. OnPlayerClickPlayerTextDraw won't be called also.
+เมื่อผู้เล่นกด ESC เพื่อยกเลิกการเลือก Textdraw ฟังก์ชั่น Callback OnPlayerClickTextDraw จะถูกเรียกและไอดี Textdraw จะเป็น 'INVALID_TEXT_DRAW' แต่กับ OnPlayerClickPlayerTextDraw จะไม่ถูกเรียกด้วย
 
 :::
 
 ## ฟังก์ชั่นที่เกี่ยวข้องกัน
 
-- [PlayerTextDrawSetSelectable](../../scripting/functions/PlayerTextDrawSetSelectable.md): Sets whether a player-textdraw is selectable through SelectTextDraw
-- [OnPlayerClickTextDraw](../../scripting/callbacks/OnPlayerClickTextDraw.md): Called when a player clicks on a textdraw.
-- [OnPlayerClickPlayer](../../scripting/callbacks/OnPlayerClickPlayer.md): Called when a player click on another.
+- [PlayerTextDrawSetSelectable](../../scripting/functions/PlayerTextDrawSetSelectable.md): ตั้งค่าให้ Player-Textdraw สามารถถูกเรียกผ่าน SelectTextDraw ได้หรือไม่
+- [OnPlayerClickTextDraw](../../scripting/callbacks/OnPlayerClickTextDraw.md): ถูกเรียกเมื่อผู้เล่นคลิกบน Textdraw
+- [OnPlayerClickPlayer](../../scripting/callbacks/OnPlayerClickPlayer.md): ถูกเรียกเมื่อผู้เล่นคลิกคนอื่น

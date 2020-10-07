@@ -1,7 +1,7 @@
 ---
 id: OnPlayerClickTextDraw
 title: OnPlayerClickTextDraw
-description: This callback is called when a player clicks on a textdraw or cancels the select mode with the Escape key.
+description: Callback นี้ถูกเรียกเมื่อผู้เล่นคลิกบน Textdraw หรือยกเลิกโหมดการเลือกด้วยปุ่ม Escape
 tags: ["player", "textdraw"]
 ---
 
@@ -13,16 +13,16 @@ Callback นี้ถูกเพิ่มใน SA-MP 0.3e และจะไ�
 
 ## คำอธิบาย
 
-This callback is called when a player clicks on a textdraw or cancels the select mode with the Escape key.
+Callback นี้ถูกเรียกเมื่อผู้เล่นคลิกบน Textdraw หรือยกเลิกโหมดการเลือกด้วยปุ่ม Escape
 
-| Name      | Description                                                                   |
+| ชื่อ      | คำอธิบาย                                                                         |
 | --------- | ----------------------------------------------------------------------------- |
-| playerid  | The ID of the player that clicked on the textdraw.                            |
-| clickedid | The ID of the clicked textdraw. INVALID_TEXT_DRAW if selection was cancelled. |
+| playerid  | ไอดีของผู้เล่นที่เลือก Textdraw                                                      |
+| clickedid | ไอดีของ Textdraw ที่ผู้เล่นคลิก หากการเลือกถูกยกเลิกจะเป็นค่า INVALID_TEXT_DRAW           |
 
 ## ส่งคืน
 
-It is always called first in filterscripts so returning 1 there also blocks other scripts from seeing it.
+มันถูกเรียกในฟิลเตอร์สคริปต์ก่อนเสมอ ดังนั้นการส่งค่าคืนเป็น 1 จะบล็อกไม่ให้ฟิลเตอร์สคริปต์อื่น ๆ ได้เห็น
 
 ## ตัวอย่าง
 
@@ -58,7 +58,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 {
     if(clickedid == gTextDraw)
     {
-         SendClientMessage(playerid, 0xFFFFFFAA, "You clicked on a textdraw.");
+         SendClientMessage(playerid, 0xFFFFFFAA, "คุณคลิกบน Textdraw");
          CancelSelectTextDraw(playerid);
          return 1;
     }
@@ -70,12 +70,11 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
 :::warning
 
-The clickable area is defined by TextDrawTextSize. The x and y parameters passed to that function must not be zero or negative.
-Do not use CancelSelectTextDraw unconditionally within this callback. This results in an infinite loop.
+พื้นที่ที่สามารถคลิกได้ถูกกำหนดโดย TextDrawTextSize พารามิเตอร์ X และ Y ที่ส่งไปในฟังก์ชั่นต้องไม่ใช่ 0 หรือค่าติดลบ ห้ามใช้ CancelSelectTextDraw โดยไม่มีเงื่อนไขใน Callback นี้ อาจทำให้เกิดลูปไม่รู้จบ
 
 :::
 
 ## ฟังก์ชั่นที่เกี่ยวข้องกัน
 
-- [OnPlayerClickPlayerTextDraw](../../scripting/callbacks/OnPlayerClickPlayerTextDraw.md): Called when a player clicks on a player-textdraw.
-- [OnPlayerClickPlayer](../../scripting/callbacks/OnPlayerClickPlayer.md): Called when a player click on another.
+- [OnPlayerClickPlayerTextDraw](../../scripting/callbacks/OnPlayerClickPlayerTextDraw.md): ถูกเรียกเมื่อผู้เล่นคลิกบน Player-Textdraw
+- [OnPlayerClickPlayer](../../scripting/callbacks/OnPlayerClickPlayer.md): ถูกเรียกเมื่อผู้เล่นคลิกคนอื่น
