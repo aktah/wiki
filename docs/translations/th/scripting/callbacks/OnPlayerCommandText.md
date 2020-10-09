@@ -1,22 +1,22 @@
 ---
 id: OnPlayerCommandText
 title: OnPlayerCommandText
-description: This callback is called when a player enters a command into the client chat window.
+description: Callback นี้ถูกเรียกเมื่อผู้เล่นป้อนคำสั่งผ่านทางหน้าต่างแชทฝั่งไคลเอนต์
 tags: ["player"]
 ---
 
 ## คำอธิบาย
 
-This callback is called when a player enters a command into the client chat window. Commands are anything that start with a forward slash, e.g. /help.
+Callback นี้ถูกเรียกเมื่อผู้เล่นป้อนคำสั่งผ่านทางหน้าต่างแชทฝั่งไคลเอนต์ คำสั่งจะคืออะไรก็ตามที่ขึ้นต้นด้วยเครื่องหมายทับหรือแสลช เช่น /help
 
-| Name      | Description                                                 |
+| ชื่อ        | คำอธิบาย                                                 |
 | --------- | ----------------------------------------------------------- |
-| playerid  | The ID of the player that entered a command.                |
-| cmdtext[] | The command that was entered (including the forward slash). |
+| playerid  | ไอดีของผู้เล่นที่ป้อนคำสั่ง                                         |
+| cmdtext[] | คำสั่งที่ถูกป้อนเข้ามา (รวมถึงเครื่องหมายทับด้วย)                       |
 
 ## ส่งคืน
 
-It is always called first in filterscripts so returning 1 there blocks other scripts from seeing it.
+มันถูกเรียกในฟิลเตอร์สคริปต์ก่อนเสมอ ดังนั้นการส่งค่าคืนเป็น 1 จะบล็อกไม่ให้สคริปต์อื่น ๆ ได้เห็น
 
 ## ตัวอย่าง
 
@@ -25,15 +25,15 @@ public OnPlayerCommandText(playerid, cmdtext[])
 {
     if(!strcmp(cmdtext, "/help", true))
     {
-        SendClientMessage(playerid, -1, "SERVER: This is the /help command!");
+        SendClientMessage(playerid, -1, "เซิร์ฟเวอร์: นี่คือคำสั่ง /help!");
         return 1;
-        // Returning 1 informs the server that the command has been processed.
-        // OnPlayerCommandText won't be called in other scripts.
+        // คืนค่า 1 แจ้งเซิร์ฟเวอร์ว่าคำสั่งนี้ได้รับการประมวลผลแล้ว
+        // OnPlayerCommandText จะไม่ถูกเรียกในสคริปต์อื่นอีก
     }
     return 0;
-    // Returning 0 informs the server that the command hasn't been processed by this script.
-    // OnPlayerCommandText will be called in other scripts until one returns 1.
-    // If no scripts return 1, the 'SERVER: Unknown Command' message will be shown to the player.
+    // คืนค่า 0 แจ้งเซิร์ฟเวอร์ว่าคำสั่งนี้ไม่ได้รับการประมวลผลโดยสคริปต์นี้
+    // OnPlayerCommandText มันจะถูกเรียกในสคริปต์อื่นจนกว่าจะมีการคืนค่าเป็น 1
+    // หากไม่มีสคริปต์ไหนเลยคืนค่าเป็น 1 ข้อความ 'SERVER: Unknown Command' จะถูกแสดงให้กับผู้เล่น
 }
 ```
 
@@ -47,4 +47,4 @@ NPC สามารถเรียก Callback นี้ได้
 
 ## ฟังก์ชั่นที่เกี่ยวข้องกัน
 
-- [SendRconCommand](../../scripting/functions/SendRconCommand.md): Sends an RCON command via the script.
+- [SendRconCommand](../../scripting/functions/SendRconCommand.md): ส่งคำสั่ง RCON ผ่านสคริปต์

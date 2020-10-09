@@ -1,23 +1,23 @@
 ---
 id: OnPlayerConnect
 title: OnPlayerConnect
-description: This callback is called when a player connects to the server.
+description: Callback นี้ถูกเรียกเมื่อผู้เล่นเชื่อมต่อกับเซิร์ฟเวอร์
 tags: ["player"]
 ---
 
 ## คำอธิบาย
 
-This callback is called when a player connects to the server.
+Callback นี้ถูกเรียกเมื่อผู้เล่นเชื่อมต่อกับเซิร์ฟเวอร์
 
-| Name     | Description                          |
+| ชื่อ       | คำอธิบาย                          |
 | -------- | ------------------------------------ |
-| playerid | The ID of the player that connected. |
+| playerid | ไอดีของผู้เล่นที่เชื่อมต่อเข้ามา |
 
 ## ส่งคืน
 
-0 - Will prevent other filterscripts from receiving this callback.
+1 - จะป้องกันไม่ให้ฟิลเตอร์สคริปต์อื่นถูกเรียกโดย Callback นี้
 
-1 - Indicates that this callback will be passed to the next filterscript.
+0 - บอกให้ Callback นี้ส่งต่อไปยังฟิลเตอร์สคริปต์ถัดไป
 
 มันถูกเรียกในฟิลเตอร์สคริปต์ก่อนเสมอ
 
@@ -28,7 +28,7 @@ public OnPlayerConnect(playerid)
 {
     new string[64], pName[MAX_PLAYER_NAME];
     GetPlayerName(playerid,pName,MAX_PLAYER_NAME);
-    format(string,sizeof string,"%s has joined the server. Welcome!",pName);
+    format(string,sizeof string,"%s ได้เชื่อมต่อเข้าไปยังเซิร์ฟเวอร์! ยินดีต้อนรับจ้า",pName);
     SendClientMessageToAll(0xFFFFFFAA,string);
     return 1;
 }
